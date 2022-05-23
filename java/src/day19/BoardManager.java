@@ -2,6 +2,8 @@ package day19;
 
 import java.util.*;
 
+import javax.swing.border.Border;
+
 import day18.ConsolProgram;
 
 public class BoardManager implements ConsolProgram {
@@ -207,6 +209,12 @@ public class BoardManager implements ConsolProgram {
 					String content = scan.next();
 					//게시글 수정
 					boards.get(num-1).modify(title, content);
+					/* 기본생성자 사용
+					Board tmp = new Board();
+					int index = boards.indexOf(tmp);
+					//번지를 통해 수정
+					Board tmp2 = boards.get(index);
+					*/	 
 					return;
 				}
 			}
