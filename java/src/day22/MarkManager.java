@@ -21,7 +21,6 @@ public class MarkManager implements ConsolProgram {
 		marks.add(new Mark(1, 1, "수학", 70, 60, 60));
 		marks.add(new Mark(2, 1, "국어", 20, 10, 0));
 		marks.add(new Mark(1, 1, "영어", 50, 40, 30));
-	
 	}
 	
 	@Override
@@ -45,21 +44,13 @@ public class MarkManager implements ConsolProgram {
 		* 학년은 1~3학년까지, 학기는 1학기 2학기가 있음
 		* 점수는 0~100 사이의 정수
 		* 학년 학기 과목이 중복될 수 없다
-		* 아무렇게 입력해도 학년과 학기로 오름차순 정렬된다 -> 잘안됨..
+		* 아무렇게 입력해도 학년과 학기 과목으로 오름차순 정렬된다
 		*/
 			if(addMark()) { //기능1
 				System.out.println("성적이 추가됬습니다");
 			}else {
 				System.out.println("이미 등록된 점수입니다. 성적 확인하세요");
 			}
-			
-			//정렬 -> 기능 구현이 안됨..
-			marks.sort(new Comparator<Mark>() {
-				@Override
-				public int compare(Mark o1, Mark o2) {
-					return o1.getGrade() - o2.getGrade();
-				}
-			});	
 			break;
 			
 		case 2:/*성적 확인
@@ -67,7 +58,7 @@ public class MarkManager implements ConsolProgram {
 		2. 학기별 성적 확인 : 학년 학기를 입력하면 해당되는 모든 성적 출력
 						총점과 평균 출력 -> 중간 40% 기말 40% 수행 20%
 		3. 시험별 성적 확인 : 학년 학기를 입력하고 점수가 있으면 성적을 보고 싶은 시험을 입력
-		 				해당 시험의 과목과 점수그리고 시험들의 총점과 평균 출력
+		 				해당 시험의 과목과 점수 그리고 시험들의 총점과 평균 출력
 		*/
 			printMark(); //기능2
 			break;
@@ -121,6 +112,8 @@ public class MarkManager implements ConsolProgram {
 	
 	//기능2) 성적 출력
 	public void printMark() {
+		//정렬
+		sortMark();
 		System.out.println("======메뉴======");
 		System.out.println("1. 전체 성적 확인");
 		System.out.println("2. 학기별 성적 확인");
@@ -148,7 +141,7 @@ public class MarkManager implements ConsolProgram {
 		if(marks == null) {
 			return;
 		}
-		
+
 		for(Mark tmp : marks) {
 			System.out.println(tmp);
 		}
@@ -251,5 +244,22 @@ public class MarkManager implements ConsolProgram {
 			System.out.println("등록된 점수가 없습니다. 수정할 수 없습니다");
 		}	
 	}//modifyMark
+	
+	//기능7) 학년 학기 과목에 따라 정렬
+	public void sortMark() {
+		//힘들었다..선생님 도움 받음 -> if 구문을 생각 못함!
+		marks.sort(new Comparator<Mark>() {
+			@Override
+			public int compare(Mark o1, Mark o2) {
+				if(o1.getGrade() != o2.getGrade()){
+				    return o1.getGrade() - o2.getGrade();
+				}
+				if(o1.getSemester() != o2.getSemester()){
+				    return o1.getSemester() - o2.getSemester();
+				}
+				return o1.getSubject().compareTo(o2.getSubject());
+			}
+		});	
+	}//sortMark
 }
 
