@@ -20,7 +20,7 @@ public class Score {
 
 	@Override
 	public String toString() {
-		double total = midterm*0.4 + finals*0.5 + performance*110.1;
+		double total = midterm*0.4 + finals*0.5 + performance*0.1;
 		return  grade + "학년 " + semester + "학기 | " + subject + "\n[중간 : " + midterm
 				+ "점, 기말 : " + finals + "점, 수행평가 : " + performance + "점]\n총점 : " + total + "점";
 	}
